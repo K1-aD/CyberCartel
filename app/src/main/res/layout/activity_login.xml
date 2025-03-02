@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+
+    <TextView
+        android:id="@+id/tv_createAcc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="Create Account"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/bt_logIn"
+        app:layout_constraintTop_toBottomOf="@+id/bt_logIn" />
+
+
+    <EditText
+        android:id="@+id/et_email_logInPage"
+        android:layout_width="327dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/custom_background_for_edittext"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="15dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.404"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_activityMain" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_Password_LogIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="@+id/et_email_logInPage"
+        app:layout_constraintStart_toStartOf="@+id/et_email_logInPage"
+        app:layout_constraintTop_toBottomOf="@+id/et_email_logInPage"
+        app:passwordToggleEnabled="true">
+
+        <EditText
+            android:id="@+id/et_passwordLogIn"
+            android:layout_width="327dp"
+            android:layout_height="63dp"
+            android:background="@drawable/custom_background_for_edittext"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingLeft="15dp"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="42dp"
+            tools:layout_editor_absoluteY="354dp" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/logo_activityMain"
+        android:layout_width="300dp"
+        android:layout_height="97dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.18"
+        app:srcCompat="@drawable/cbcartel_text" />
+
+    <Button
+        android:id="@+id/bt_logIn"
+        android:layout_width="325dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/custombutton"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/til_Password_LogIn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/til_Password_LogIn"
+        app:layout_constraintTop_toBottomOf="@+id/til_Password_LogIn" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
