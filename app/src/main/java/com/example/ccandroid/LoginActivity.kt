@@ -6,10 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class LoginActivity : AppCompatActivity() {
 
@@ -21,18 +18,25 @@ class LoginActivity : AppCompatActivity() {
 
         databaseHelper = DatabaseHelper(this)
 
-        val loginButton: Button = findViewById(R.id.bt_logIn)
         val emailEditText: EditText = findViewById(R.id.et_email_logInPage)
         val passwordEditText: EditText = findViewById(R.id.et_passwordLogIn)
+        val loginButton: Button = findViewById(R.id.bt_logIn)
         val createAccountText: TextView = findViewById(R.id.tv_createAcc)
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 
-            if (databaseHelper.checkUser(email, password)) {
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (databaseHelper.loginUser(email, password)) {
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-                // Proceed to home screen
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
             } else {
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show()
             }
@@ -41,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
         createAccountText.setOnClickListener {
             val intent = Intent(this, CreateAccountActivity::class.java)
             startActivity(intent)
+            finish() // Close LoginActivity when navigating to CreateAccountActivity
         }
     }
 }
