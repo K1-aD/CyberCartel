@@ -2,21 +2,20 @@ package com.example.ccandroid
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 
 class CreateAccountActivity : AppCompatActivity() {
 
-    private lateinit var databaseHelper: DatabaseHelper
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_account)
 
-        databaseHelper = DatabaseHelper(this)
+        auth = FirebaseAuth.getInstance()  // Initialize FirebaseAuth
 
         val usernameEditText: EditText = findViewById(R.id.et_username_createAccountPage)
         val emailEditText: EditText = findViewById(R.id.et_email_createAccountPage)
@@ -41,20 +40,37 @@ class CreateAccountActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (databaseHelper.registerUser(username, email, password)) {
-                Toast.makeText(this, "Account Created Successfully", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                finish() // Close CreateAccountActivity after success
-            } else {
-                Toast.makeText(this, "Error Creating Account", Toast.LENGTH_SHORT).show()
-            }
+            registerUser(username, email, password)
         }
 
         alreadyHaveAccountText.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish() // Close CreateAccountActivity when navigating back
+            finish()
         }
+    }
+
+    private fun registerUser(username: String, email: String, password: String) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    user?.updateProfile(
+                        UserProfileChangeRequest.Builder()
+                            .setDisplayName(username)
+                            .build()
+                    )?.addOnCompleteListener { profileUpdateTask ->
+                        if (profileUpdateTask.isSuccessful) {
+                            Toast.makeText(this, "Account Created Successfully", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this, LoginActivity::class.java))
+                            finish()
+                        } else {
+                            Toast.makeText(this, "Failed to set username", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 }

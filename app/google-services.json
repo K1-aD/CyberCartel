@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "803138867822",
+    "project_id": "ccandroid-fad53",
+    "storage_bucket": "ccandroid-fad53.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803138867822:android:887ac3966870f4a0fa8c7f",
+        "android_client_info": {
+          "package_name": "com.example.ccandroid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAm2QZJWAhHgqaHoVu9xHH4tmE8yobCPBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
