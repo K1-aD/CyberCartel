@@ -15,7 +15,7 @@ class CreateAccountActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_account)
 
-        auth = FirebaseAuth.getInstance()  // Initialize FirebaseAuth
+        auth = FirebaseAuth.getInstance()
 
         val usernameEditText: EditText = findViewById(R.id.et_username_createAccountPage)
         val emailEditText: EditText = findViewById(R.id.et_email_createAccountPage)
